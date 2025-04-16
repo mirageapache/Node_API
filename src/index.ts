@@ -4,7 +4,7 @@ import fastify from 'fastify';
 const server = fastify({ logger: true });
 
 // 註冊路由
-server.get('/test', async (request, reply) => {
+server.get('/test', async () => {
   return { 'message': 'get test success' };
 });
 
