@@ -1,12 +1,11 @@
 import 'dotenv/config';
 import fastify from 'fastify';
+import { userRoutes } from './routes/userRoutes';
 
 const server = fastify({ logger: true });
 
-// 註冊路由
-server.get('/test', async () => {
-  return { 'message': 'get test success' };
-});
+// 定義路由
+server.register(userRoutes, { prefix: '/api' });
 
 // 啟動伺服器
 const start = async () => {
