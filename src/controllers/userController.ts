@@ -9,6 +9,7 @@ export class UserController {
 
   // 獲取所有用戶
   async getAllUsers() {
+    console.log(this.users);
     return this.users;
   }
 
