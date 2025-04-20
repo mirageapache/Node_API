@@ -2,6 +2,8 @@ import 'dotenv/config';
 import fastify from 'fastify';
 import { userRoutes } from './routes/userRoutes';
 import pool from './config/database';
+import fastifyStatic from '@fastify/static';
+import path from 'path';
 
 const server = fastify({ logger: true });
 
@@ -17,8 +19,18 @@ const testDbConnection = async () => {
   }
 };
 
+// 註冊靜態檔案服務
+server.register(fastifyStatic, {
+    root: path.join(__dirname, '../public'),
+    prefix: '/'
+});
+
 // 註冊路由
 server.register(userRoutes, { prefix: '/api' });
+
+server.get('/test', async () => {
+  return { 'message': 'get test success' };
+});
 
 // 啟動伺服器
 const start = async () => {
